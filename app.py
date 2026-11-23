@@ -109,7 +109,7 @@ st.write("Input columns:", list(input_data.columns))
 
 st.write("Model type:", type(model))
 st.write("Pipeline steps:", model.named_steps.keys())
-    prediction = model.predict(input_data)[0]
+prediction = model.predict(input_data)[0]
 
     # Generate probability
     probabilities = model.predict_proba(input_data)[0]
