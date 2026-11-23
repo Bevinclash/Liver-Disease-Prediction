@@ -31,6 +31,7 @@ st.warning(
 with st.expander("Model Diagnostics"):
     st.write("Python version:", sys.version)
     st.write("Scikit-learn version:", sklearn.__version__)
+    st.write("Joblib version:", joblib.__version__)
     st.write("Model type:", type(model))
     st.write("Pipeline steps:", model.named_steps.keys())
 
