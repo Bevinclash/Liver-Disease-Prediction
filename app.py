@@ -99,6 +99,16 @@ if st.button("Predict", type="primary"):
     }])
 
     # Generate prediction
+import sklearn
+import sys
+
+st.write("Python version:", sys.version)
+st.write("Scikit-learn version:", sklearn.__version__)
+st.write("Input shape:", input_data.shape)
+st.write("Input columns:", list(input_data.columns))
+
+st.write("Model type:", type(model))
+st.write("Pipeline steps:", model.named_steps.keys())
     prediction = model.predict(input_data)[0]
 
     # Generate probability
