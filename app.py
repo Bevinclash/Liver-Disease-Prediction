@@ -2,6 +2,8 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import sklearn
+import sys
 
 # Load trained ML pipeline
 model = joblib.load("liver_disease_model.pkl")
@@ -24,6 +26,13 @@ st.warning(
     "This tool is for educational purposes only. "
     "It is not a medical diagnostic tool."
 )
+
+# Diagnostics
+with st.expander("Model Diagnostics"):
+    st.write("Python version:", sys.version)
+    st.write("Scikit-learn version:", sklearn.__version__)
+    st.write("Model type:", type(model))
+    st.write("Pipeline steps:", model.named_steps.keys())
 
 st.divider()
 
@@ -99,21 +108,10 @@ if st.button("Predict", type="primary"):
     }])
 
     # Generate prediction
-import sklearn
-import sys
-
-st.write("Python version:", sys.version)
-st.write("Scikit-learn version:", sklearn.__version__)
-st.write("Input shape:", input_data.shape)
-st.write("Input columns:", list(input_data.columns))
-
-st.write("Model type:", type(model))
-st.write("Pipeline steps:", model.named_steps.keys())
-prediction = model.predict(input_data)[0]
+    prediction = model.predict(input_data)[0]
 
     # Generate probability
     probabilities = model.predict_proba(input_data)[0]
-
     disease_probability = probabilities[1] * 100
 
     st.subheader("Prediction Result")
@@ -132,4 +130,3 @@ prediction = model.predict(input_data)[0]
         "This probability is a model output, not an individual's "
         "clinically established risk."
     )
-    
